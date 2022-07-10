@@ -1,0 +1,94 @@
+<!-- begin #header -->
+
+<div id="header" class="header navbar-default" ng-controller="headerController">
+	<!-- begin navbar-header -->
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle pull-left" data-click="sidebar-toggled" ng-if="setting.layout.pageTwoSidebar === true">      
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<button type="button" class="navbar-toggle pull-right" data-click="right-sidebar-toggled" ng-if="setting.layout.pageTwoSidebar === true">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a  class="navbar-brand" ui-sref="app.{{user.roleName | lowercase}}.screen"> <b>{{schoolName}}</b> </a>
+		<button type="button" class="navbar-toggle" data-click="sidebar-toggled" ng-if="!setting.layout.pageTwoSidebar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
+	<!-- end navbar-header -->
+	<!-- begin header-nav -->
+	<ul class="navbar-nav navbar-right" style="width:100%;">
+		<li class="m-t-10">		
+
+			<div class="m-r-5" style="display: inline-block;">
+				<select ng-options="c.text  for c in academicYears  track by c.value" ng-model="selectedAcademicYear.activeAcademicYear" name="academicYear" selectpicker="" selectpicker-options="academicYears" class="form-control input-sm"
+						ng-change="changeAcademicYear(selectedAcademicYear.activeAcademicYear)">
+
+				</select>
+
+			</div>
+ <div class="" style="display: inline-block;" ng-if="user.roleId!=5 && (branches.length>1 && isSchoolCode==false)">
+          <select  name="branch" class="form-control input-sm" ng-required="true" ng-options="x as x.branchName for x in branches"
+						ng-model="branch.selectedBranch" selectpicker="" selectpicker-options="branches"
+						ng-change="changeBranch(branch.selectedBranch)">            
+				</select>
+          </div>
+		</li>
+		<li>
+
+		</li>
+
+		<li class="dropdown navbar-user f-right">
+			<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+				<img ng-if="user.photoPath!='images/defaultprofile.png'" ng-src="{{user.photoPath}}" alt="">
+          <img ng-if="user.photoPath=='images/defaultprofile.png'" src="images/defaultprofile.png" alt="">
+				<b class="caret"></b>
+			</a>
+			<div class="dropdown-menu dropdown-menu-right drop-custom">
+				<a ui-sref="app.{{user.roleName | lowercase}}.profile" href="javascript:;" class="dropdown-item"><i class="fa fa-cog"></i> My Profile</a>
+				<a ui-sref="app.changePassword" href="javascript:;" class="dropdown-item"><i class="fa fa-pencil-alt"></i> Change Password</a>
+				<a href="javascript:;" class="dropdown-item" ng-click="logOut()"><i class="fa fa-times"></i> Exit</a>
+				<a href="javascript:;" class="dropdown-item" ng-click="clearLogout()"><i class="fa fa-sync fa-spin"></i> Reset</a>
+			</div>
+		</li>
+		<li class="divider d-none d-md-block" ng-if="setting.layout.pageTwoSidebar === true"></li>
+		<li class="d-none d-md-block" ng-if="setting.layout.pageTwoSidebar === true">
+			<a href="javascript:;" data-click="right-sidebar-toggled" class="f-s-14">
+				<i class="fa fa-th"></i>
+			</a>
+		</li>
+	</ul>
+  	<div class="profile hed-profile">
+		<div class="profile-header">
+			<!-- BEGIN profile-header-cover -->
+			<div class="profile-header-cover students"></div>
+			<!-- END profile-header-cover -->
+			<!-- BEGIN profile-header-content -->
+			<div class="profile-header-content">
+				<!-- BEGIN profile-header-img -->
+				<div class="profile-header-img">
+					<img ng-if="user.photoPath!='images/defaultprofile.png'" ng-src="{{user.photoPath}}" alt="">
+          <img ng-if="user.photoPath=='images/defaultprofile.png'" src="images/defaultprofile.png" alt="">
+				</div>        
+				<!-- END profile-header-img -->
+				<!-- BEGIN profile-header-info -->
+				<div class="profile-header-info">
+					<h4 class="m-t-10 m-b-5">{{user.fullName}}</h4>
+          
+				</div>
+				<div class="pull-right home-icon">
+					<button type="button" ng-click="goToHome(user)" style="padding-right:10px;" class="btn btn-warning">
+						<i class="fa fa-home" aria-hidden="true"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!-- end header navigation right -->
+</div>
+<!-- end #header -->

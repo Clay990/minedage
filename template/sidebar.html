@@ -1,0 +1,474 @@
+<!-- begin #sidebar -->
+<div id="sidebar" class="sidebar" ng-controller="sidebarController" ng-class="{ 'sidebar-transparent': setting.layout.pageSidebarTransparent }">
+    <!-- begin sidebar scrollbar -->
+    <div data-scrollbar="true" data-height="100%" >
+    	<!-- begin sidebar user -->
+		<ul class="nav">
+			<li class="nav-profile">
+				<a href="javascript:;" data-toggle="nav-profile">
+					<div class="cover with-shadow"></div>
+					<div class="image">
+						<img ng-src="{{user.photoPath}}" alt="" />
+					</div>
+                    <div class="info">
+                        <b class="caret pull-right"></b>
+                        {{user.fullName}}
+                        <small>{{user.roleName}}</small>
+                    </div>
+				</a>
+			</li>
+			<li>
+                <ul class="nav nav-profile">
+                    <li><a ui-sref="app.{{user.roleName | lowercase}}.profile" href="javascript:;"><i class="fa fa-cog"></i> My Profile</a></li>
+                    <li><a ui-sref="app.changePassword" href="javascript:;"><i class="fa fa-pencil-alt"></i> Change Password</a></li>
+                    <li><a href="javascript:;" ng-click="logOut()"><i class="fa fa-times"></i> Exit</a></li>
+                    <li><a href="javascript:;" ng-click="clearLogout()"><i class="fa fa-sync fa-spin"></i> Reset</a></li>
+                </ul>
+			</li>
+		</ul>
+		<!-- end sidebar user -->
+		<!-- begin sidebar nav -->
+        <ul class="nav" ng-if="user.roleId==1">
+          <li class="nav-header" ng-if="user.roleId!=5 && (branches.length>1 && isSchoolCode==false)">Branch Name</li>
+          <li class="branch-cod" ng-if="user.roleId!=5 && (branches.length>1 && isSchoolCode==false)">
+            <select  name="branch" class="form-control input-sm" ng-required="true" ng-options="x as x.branchName for x in branches"
+						ng-model="branch.selectedBranch" selectpicker="" selectpicker-options="branches"
+						ng-change="changeBranch(branch.selectedBranch)">            
+				</select>
+          </li>
+            <li ng-class="{active:$state.includes('app.admin.dashboard')}">
+                <a ui-sref="app.admin.dashboard">
+                    <i class="fa fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.admin.attendance.employeeList')}" ng-if="isEmployeeList">
+                <a ui-sref="app.admin.attendance.employeeList">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Employee List</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.admin.attendance.studentList')}" ng-if="isStudentList">
+                <a ui-sref="app.admin.attendance.studentList">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Student List</span>
+                </a>
+
+            </li>
+            <li class="has-sub"  ng-class="{active:$state.includes('app.admin.fee')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-clipboard"></i>
+                    <span>Fee</span>
+                </a>
+                <ul class="sub-menu" ng-if="isPaymentSummary">
+                    <li ng-class="{active:$state.includes('app.admin.fee.feePaymentSummary')}"><a ui-sref="app.admin.fee.feePaymentSummary" href="javascript:;">Fee Payment Summary</a></li>
+                </ul>
+            </li>
+            <li class="has-sub" ng-if="isNotice" ng-class="{active:$state.includes('app.admin.notice')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-clipboard"></i>
+                    <span>Notice</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.admin.notice.sendNotice')}"><a ui-sref="app.admin.notice.sendNotice" href="javascript:;">Send Notice</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.notice.viewNotice')}"><a ui-sref="app.admin.notice.viewNotice" href="javascript:;">View Notice</a></li>
+                </ul>
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.attendance')}" ng-if="isAttendanceModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-calendar"></i>
+                    <span>Attendance</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.admin.attendance.holidayCalendar')}"><a href="javascript:;" ui-sref="app.admin.attendance.holidayCalendar">Holiday Calendar</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.attendance.attendanceReport')}"><a href="javascript:;" ui-sref="app.admin.attendance.attendanceReport">Attendance Report </a></li>
+                    <li ng-class="{active:$state.includes('app.admin.attendance.attendanceInOut')}"><a href="javascript:;" ui-sref="app.admin.attendance.attendanceInOut">Attendance In-Out</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.attendance.monthlyReport')}"><a ui-sref="app.admin.attendance.monthlyReport" href="javascript:;">Attendance Monthly</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.attendance.absentReport')}"><a href="javascript:;" ui-sref="app.admin.attendance.absentReport">Absent Report</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.attendance.alertReport')}"><a href="javascript:;" ui-sref="app.admin.attendance.alertReport">Attendance Alert </a></li>
+
+                </ul>
+            </li>
+
+            <li ng-class="{active:$state.includes('app.admin.markAttendance')}" ng-if="isMarkAttendance">
+                <a ui-sref="app.admin.markAttendance">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Mark Attendance</span>
+                </a>
+
+            </li>
+
+            <li class="has-sub" ng-class="{active:$state.includes('app.admin.alert')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Alert</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.admin.alert.alertReport')}"><a ui-sref="app.admin.alert.alertReport" href="javascript:;">Alert Report</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.alert.sendAppAlert')}" ng-if="isSendAppAlert"><a ui-sref="app.admin.alert.sendAppAlert" href="javascript:;">Send App Alert</a></li>
+
+
+                </ul>
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.admin.assignment')}" ng-if="isAssignmentModule && isAssignment">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Assignment</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.admin.assignment.uploadAssignment')}"><a ui-sref="app.admin.assignment.uploadAssignment" href="javascript:;">Upload Assignment</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.assignment.viewAssignment')}"><a ui-sref="app.admin.assignment.viewAssignment" href="javascript:;">View Assignment</a></li>
+                </ul>
+
+            </li>
+
+            <li class="has-sub" ng-class="{active:$state.includes('app.admin.onlineExam')}" ng-if="isOnlineExamModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Online Exam</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.admin.onlineExam.uploadOnlineExam')}"><a ui-sref="app.admin.onlineExam.uploadOnlineExam" href="javascript:;">Upload Online Exam</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.onlineExam.viewOnlineExam')}"><a ui-sref="app.admin.onlineExam.viewOnlineExam" href="javascript:;">View Online Exam</a></li>
+                    <li ng-class="{active:$state.includes('app.admin.onlineExam.viewOnlineExamResult')}"><a ui-sref="app.admin.onlineExam.viewOnlineExamResult" href="javascript:;">Online Exam Result</a></li>
+                </ul>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.admin.timeTable')}">
+                <a ui-sref="app.admin.timeTable">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timetable</span>
+                </a>
+
+            </li>
+
+            <li ng-class="{active:$state.includes('app.admin.helpRequest')}">
+                <a ui-sref="app.admin.helpRequest">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Help</span>
+                </a>
+
+            </li>
+
+            <li>
+                <a href="{{school.siteUrl}}">
+                    <i class="fas fa-desktop"></i>
+                    <span>Visit Web</span>
+                </a>
+
+            </li>
+        </ul>
+        <ul class="nav" ng-if="user.roleId==5">
+            <li class="nav-header">Navigation</li>
+            <li ng-class="{active:$state.includes('app.student.dashboard')}">
+                <a ui-sref="app.student.dashboard">
+                    <i class="fa fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.student.notice')}" ng-if="isNotice">
+                <a ui-sref="app.student.notice">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Notices</span>
+                </a>
+
+            </li>
+
+            <li class="has-sub" ng-class="{active:$state.includes('app.student.attendance')}" ng-if="isAttendanceModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-calendar"></i>
+                    <span>Attendance</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.student.attendance.holidayCalendar')}"><a href="javascript:;" ui-sref="app.student.attendance.holidayCalendar">Holiday Calendar</a></li>
+                    <li ng-class="{active:$state.includes('app.student.attendance.attendanceReport')}"><a href="javascript:;" ui-sref="app.student.attendance.attendanceReport">Attendance Report </a></li>
+                    <li ng-class="{active:$state.includes('app.student.attendance.attendanceInOut')}"><a href="javascript:;" ui-sref="app.student.attendance.attendanceInOut">Attendance In-Out</a></li>
+                    <li ng-class="{active:$state.includes('app.student.attendance.monthlyReport')}"><a ui-sref="app.student.attendance.monthlyReport" href="javascript:;">Attendance Monthly</a></li>
+                    <li ng-class="{active:$state.includes('app.student.attendance.absentReport')}"><a href="javascript:;" ui-sref="app.student.attendance.absentReport">Absent Report</a></li>
+                    <li ng-class="{active:$state.includes('app.student.attendance.alertReport')}"><a href="javascript:;" ui-sref="app.student.attendance.alertReport">Attendance Alert </a></li>
+                </ul>
+            </li>
+
+
+            <li ng-class="{active:$state.includes('app.student.alert.alertReport')}">
+                <a ui-sref="app.student.alert.alertReport">
+                    <i class="fas fa-bell"></i>
+                    <span>Alert Report</span>
+                </a>
+            </li>
+
+
+
+            <li class="has-sub" ng-if="isFeeModule" ng-class="{active:$state.includes('app.student.fee')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-rupee-sign"></i>
+                    <span>Fee</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.student.fee.feeDetail')}"><a href="javascript:;" ui-sref="app.student.fee.feeDetail">Fee Detail </a></li>
+                    <li ng-class="{active:$state.includes('app.student.fee.feeStructure')}"><a href="javascript:;" ui-sref="app.student.fee.feeStructure">Fee Structure </a></li>
+                    <li ng-class="{active:$state.includes('app.student.fee.feePayment')}"><a href="javascript:;" ui-sref="app.student.fee.feePayment">Fee Payment </a></li>
+
+                </ul>
+            </li>
+            <li ng-class="{active:$state.includes('app.student.assignment')}" ng-if="isAssignmentModule">
+                <a ui-sref="app.student.assignment">
+                    <i class="fas fa-book"></i>
+                    <span>Assignments</span>
+                </a>
+
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.student.onlineExam')}" ng-if="isOnlineExamModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Online Exam</span>
+                </a>
+                <ul class="sub-menu">
+
+                    <li ng-class="{active:$state.includes('app.student.onlineExam.viewOnlineExam')}"><a ui-sref="app.student.onlineExam.viewOnlineExam" href="javascript:;">View Online Exam</a></li>
+                    <li ng-class="{active:$state.includes('app.student.onlineExam.viewOnlineExamResult')}"><a ui-sref="app.student.onlineExam.viewOnlineExamResult" href="javascript:;">Online Exam Result</a></li>
+                </ul>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.student.timeTable')}">
+                <a ui-sref="app.student.timeTable">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timetable</span>
+                </a>
+
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.student.assessmentResult')}" ng-if="isExaminationModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-pen-square"></i>
+                    <span>Examination</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-repeat="a in assessments"><a ng-click="assessmentResult(a)" href="javascript:;">{{a.assessmentName}} Result</a></li>
+                    <li><a ui-sref="app.student.examination.finalResult" href="javascript:;">Final Result</a></li>
+
+                </ul>
+            </li>
+            <li ng-class="{active:$state.includes('app.student.downloads')}">
+                <a ui-sref="app.student.downloads">
+                    <i class="fas fa-cloud-download-alt"></i>
+                    <span>Downloads</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.student.helpRequest')}">
+                <a ui-sref="app.student.helpRequest">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Help</span>
+                </a>
+
+            </li>
+             <li ng-class="{active:$state.includes('app.student.elearningMaterial')}"
+             ng-if="isElearningModule">
+                <a ui-sref="app.student.elearningMaterial">
+                    <i class="fas fa-life-ring"></i>
+                    <span>E-Learning</span>
+                </a>
+
+            </li>
+            <li>
+                <a href="{{school.siteUrl}}">
+                    <i class="fas fa-desktop"></i>
+                    <span>Visit Web</span>
+                </a>
+
+            </li>
+           <!-- <li ng-class="{active:$state.includes('app.student.setting')}">
+                <a ui-sref="app.student.setting">
+                    <i class="fas fa-cog fa-fw"></i>
+                    <span>Setting</span>
+                </a>
+
+            </li>-->
+        </ul>
+        <ul class="nav" ng-if="user.roleId==2 || user.roleId==3">
+            <li class="nav-header">Navigation</li>
+             <li class="nav-header" ng-if="user.roleId!=5 && (branches.length>1 && isSchoolCode==false)">Branch Name</li>
+          <li class="branch-cod" ng-if="user.roleId!=5 && (branches.length>1 && isSchoolCode==false)">
+            <select  name="branch" class="form-control input-sm" ng-required="true" ng-options="x as x.branchName for x in branches"
+						ng-model="branch.selectedBranch" selectpicker="" selectpicker-options="branches"
+						ng-change="changeBranch(branch.selectedBranch)">            
+				</select>
+          </li>
+            <li ng-class="{active:$state.includes('app.teacher.dashboard')}">
+                <a ui-sref="app.teacher.dashboard">
+                    <i class="fa fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.teacher.attendance.studentList')}" ng-if="isStudentList">
+                <a ui-sref="app.teacher.attendance.studentList">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Student List</span>
+                </a>
+
+            </li>
+            <li class="has-sub" ng-if="isNotice" ng-class="{active:$state.includes('app.teacher.notice')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-clipboard"></i>
+                    <span>Notice</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.notice.sendNotice')}"><a ui-sref="app.teacher.notice.sendNotice" href="javascript:;">Send Notice</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.notice.viewNotice')}"><a ui-sref="app.teacher.notice.viewNotice" href="javascript:;">View Notice</a></li>
+                </ul>
+            </li>
+
+            <li class="has-sub" ng-class="{active:$state.includes('app.attendance')}" ng-if="isAttendanceModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-calendar"></i>
+                    <span>Attendance</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.holidayCalendar')}"><a href="javascript:;" ui-sref="app.teacher.attendance.holidayCalendar">Holiday Calendar</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.attendanceReport')}"><a href="javascript:;" ui-sref="app.teacher.attendance.attendanceReport">Attendance Report </a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.attendanceInOut')}"><a href="javascript:;" ui-sref="app.teacher.attendance.attendanceInOut">Attendance In-Out</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.monthlyReport')}"><a ui-sref="app.teacher.attendance.monthlyReport" href="javascript:;">Attendance Monthly</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.absentReport')}"><a href="javascript:;" ui-sref="app.teacher.attendance.absentReport">Absent Report</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.attendance.alertReport')}"><a href="javascript:;" ui-sref="app.teacher.attendance.alertReport">Attendance Alert </a></li>
+
+                </ul>
+            </li>
+
+            <li ng-class="{active:$state.includes('app.teacher.markAttendance')}" ng-if="isMarkAttendance">
+                <a ui-sref="app.teacher.markAttendance">
+                    <i class="fas fa-clipboard"></i>
+                    <span>Mark Attendance</span>
+                </a>
+
+            </li>
+
+            <li class="has-sub" ng-class="{active:$state.includes('app.teacher.alert')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Alert</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.alert.alertReport')}"><a ui-sref="app.teacher.alert.alertReport" href="javascript:;">Alert Report</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.alert.sendAppAlert')}" ng-if="isSendAppAlert"><a ui-sref="app.teacher.alert.sendAppAlert" href="javascript:;">Send App Alert</a></li>
+
+
+                </ul>
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.teacher.assignment')}" ng-if="isAssignmentModule && isAssignment">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Assignment</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.assignment.uploadAssignment')}"><a ui-sref="app.teacher.assignment.uploadAssignment" href="javascript:;">Upload Assignment</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.assignment.viewAssignment')}"><a ui-sref="app.teacher.assignment.viewAssignment" href="javascript:;">View Assignment</a></li>
+                </ul>
+
+            </li>
+            <li class="has-sub" ng-class="{active:$state.includes('app.teacher.onlineExam')}" ng-if="isOnlineExamModule">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>Online Exam</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.onlineExam.uploadOnlineExam')}"><a ui-sref="app.teacher.onlineExam.uploadOnlineExam" href="javascript:;">Upload Online Exam</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.onlineExam.viewOnlineExam')}"><a ui-sref="app.teacher.onlineExam.viewOnlineExam" href="javascript:;">View Online Exam</a></li>
+                    <li ng-class="{active:$state.includes('app.teacher.onlineExam.viewOnlineExamResult')}"><a ui-sref="app.teacher.onlineExam.viewOnlineExamResult" href="javascript:;">Online Exam Result</a></li>
+                </ul>
+
+            </li>
+             <li class="has-sub" ng-class="{active:$state.includes('app.teacher.elearning')}">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fas fa-bell"></i>
+                    <span>E-learning</span>
+                </a>
+                <ul class="sub-menu">
+                    <li ng-class="{active:$state.includes('app.teacher.elearning.elearningMaterial')}"><a ui-sref="app.teacher.elearning.elearningMaterial" href="javascript:;">View</a></li>
+                </ul>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.teacher.timeTable')}">
+                <a ui-sref="app.teacher.timeTable">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timetable</span>
+                </a>
+
+            </li>
+
+            <li ng-class="{active:$state.includes('app.teacher.helpRequest')}">
+                <a ui-sref="app.teacher.helpRequest">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Help</span>
+                </a>
+
+            </li>
+
+            <li>
+                <a href="{{school.siteUrl}}">
+                    <i class="fas fa-desktop"></i>
+                    <span>Visit Web</span>
+                </a>
+
+            </li>
+        </ul>
+        <ul class="nav" ng-if="user.roleId==10">
+            <li class="nav-header">Navigation</li>
+            <li ng-class="{active:$state.includes('app.alertuser.dashboard')}">
+                <a ui-sref="app.alertuser.dashboard">
+                    <i class="fa fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+            </li>
+
+            <li ng-class="{active:$state.includes('app.alertuser.alert')}">
+                <a ui-sref="app.alertuser.alert.alertReport">
+                    <i class="fas fa-bell"></i>
+                    <span>Alert Report</span>
+                </a>
+
+            </li>
+            <li ng-class="{active:$state.includes('app.alertuser.helpRequest')}">
+                <a ui-sref="app.alertuser.helpRequest">
+                    <i class="fas fa-life-ring"></i>
+                    <span>Help</span>
+                </a>
+
+            </li>
+            <li>
+                <a href="{{school.siteUrl}}">
+                    <i class="fas fa-desktop"></i>
+                    <span>Visit Web</span>
+                </a>
+
+            </li>
+
+        </ul>
+        <!-- end sidebar nav -->
+    </div>
+
+
+</div>
+<div class="sidebar-bg"></div>
+<!-- end #sidebar -->
+
