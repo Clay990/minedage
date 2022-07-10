@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" ng-app="colorAdminApp">
+<!--<![endif]-->
+<head>
+     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'self' http://* https://* 'unsafe-inline'; script-src * 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'; img-src * 'self' data: *; connect-src *" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="assets/plugins/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/plugins/font-awesome/5.0/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="assets/plugins/animate/animate.min.css" rel="stylesheet" />
+    <link href="assets/css/default/style.min.css" rel="stylesheet" />
+     <link href="assets/css/default/Generic-class.css" rel="stylesheet" />
+    <link href="assets/css/default/style-responsive.min.css" rel="stylesheet" />
+    <link href="assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
+    <link href="assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" id="theme" />
+    <link href="assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" id="theme" />
+
+    <link href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" id="theme" />
+    <link href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" id="theme" />
+
+
+    <link href="assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet" id="theme" />
+    <link href="assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" id="theme" />
+
+    <link href="assets/plugins/dropzone/min/dropzone.min.css" rel="stylesheet" id="theme" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/bootstrap-timepicker.css" rel="stylesheet" />
+    <link href="css/ng-tags-input.css" rel="stylesheet" />
+    <link href="css/ng-tags-input.bootstrap.css" rel="stylesheet" />
+    <script src="assets/plugins/jquery/jquery-3.2.1.min.js"></script>
+
+     <script src="components/monaca-cordova-loader/cordova-loader.js"></script>
+   <!--<script type="text/javascript" src="cordova.js"></script>-->
+     <!--<script type="text/javascript" src="scripts/plugins.js"></script>-->
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    
+    <base href="./">
+
+    <!--<base href="/">-->
+</head>
+<body ng-controller="appController" ng-cloak ng-class="{'pace-top': setting.layout.paceTop, 'boxed-layout': setting.layout.pageBoxedLayout, 'bg-white': setting.layout.pageBgWhite }">
+<div class="loading-box" id="spinner" role="dialog">
+  <div class="triple-spinner l-h-w"></div>
+</div>
+<!-- begin #page-loader -->
+<div id="page-loader" ng-controller="pageLoaderController" class="fade in"><span class="spinner"></span></div>
+<!-- end #page-loader -->
+<!-- begin #page-container -->
+<div id="page-container" class="page-container page-sidebar-fixed page-header-fixed fade"
+     ng-class="{
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-content-full-height': setting.layout.pageContentFullHeight,
+	        'page-footer-fixed': setting.layout.pageFixedFooter,
+	        'page-with-right-sidebar': setting.layout.pageRightSidebar,
+	        'page-sidebar-minified': setting.layout.pageSidebarMinified,
+	        'page-with-two-sidebar': setting.layout.pageTwoSidebar,
+	        'page-right-sidebar-toggled': setting.layout.pageTwoSidebar,
+	        'page-with-top-menu': setting.layout.pageTopMenu,
+	        'page-without-sidebar': setting.layout.pageWithoutSidebar,
+	        'page-with-wide-sidebar': setting.layout.pageWideSidebar,
+	        'page-with-light-sidebar': setting.layout.pageLightSidebar,
+	        'p-t-0': setting.layout.pageWithoutHeader
+	    }">
+    <div ui-view></div>
+</div>
+<!-- end page container -->
+<script>
+        Pace.on('start', function () {
+            $('#spinner').show();
+        });
+
+        Pace.on('done', function () {
+            $('#spinner').hide();
+        });
+    </script>
+<script src="assets/plugins/jquery/jquery-3.2.1.min.js"></script>
+<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="assets/plugins/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/plugins/angularjs/angular.min.js"></script>
+<script src="assets/plugins/angularjs/angular-ui-route.min.js"></script>
+<script src="assets/plugins/bootstrap-angular-ui/ui-bootstrap-tpls.min.js"></script>
+
+<script src="assets/plugins/angularjs/ng-tags-input.js"></script>
+
+<script src="assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+<script src="assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+<script src="assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/plugins/dropzone/min/dropzone.min.js"></script>
+<script src="scripts/angular-datatables.js"></script>
+<script src="scripts/angular-datatables.bootstrap.js"></script>
+<script src="scripts/ng-dropzone.js"></script>
+<script src="scripts/bootstrap-timepicker.js"></script>
+
+<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/theme/default.min.js"></script>
+<script src="assets/js/apps.js"></script>
+
+<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+<script src="assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js"></script>
+<script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+
+<!-- ================== END BASE JS ================== -->
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+<script src="assets/plugins/angularjs/ocLazyLoad.min.js"></script>
+
+<script src="angular-app.js"></script>
+<script src="angular-setting.js"></script>
+<script src="angular-controller.js"></script>
+<script src="angular-directive.js"></script>
+<script src="controller/appController.js"></script>
+<script src="controller/headerController.js"></script>
+<script src="controller/sidebarController.js"></script>
+<script src="controller/loginController.js"></script>
+<script src="controller/branchController.js"></script>
+<script src="controller/phoneNumberController.js"></script>
+<script src="controller/changePasswordController.js"></script>
+
+
+<script src="controller/student/dashboardController.js"></script>
+<script src="controller/student/accountController.js"></script>
+<script src="controller/student/screenController.js"></script>
+<script src="controller/student/onlineexam/onlineExamController.js"></script>
+<script src="controller/student/onlineexam/uploadOnlineExamWorkController.js"></script>
+
+<script src="controller/student/alert/alertReportController.js"></script>
+<script src="controller/student/attendance/attendanceAlertReportController.js"></script>
+<script src="controller/student/attendance/attendanceInOutReportController.js"></script>
+<script src="controller/student/attendance/attendanceReportController.js"></script>
+<script src="controller/student/attendance/absentReportController.js"></script>
+<script src="controller/student/attendance/attendanceMonthlyReportController.js"></script>
+<script src="controller/student/attendance/holidayCalendarController.js"></script>
+<script src="controller/student/noticeController.js"></script>
+<script src="controller/student/profileController.js"></script>
+<script src="controller/student/uploadAssignmentWorkController.js"></script>
+<script src="controller/student/uploadAssignmentWorkFlowController.js"></script>
+<script src="controller/student/smartClassController.js"></script>
+<script src="controller/student/elearningController.js"></script>
+
+<script src="controller/student/classCalendarController.js"></script>
+<script src="controller/student/onlineQuizController.js"></script>
+<script src="controller/student/onlineexam/viewOnlineExamResultController.js"></script>
+<script src="controller/student/onlineexam/viewOnlineExamWorkFlowDocumentController.js"></script>
+
+<script src="controller/student/fee/feeDetailController.js"></script>
+<script src="controller/student/fee/feeStructureController.js"></script>
+<script src="controller/student/fee/feePaymentController.js"></script>
+<script src="controller/student/assignmentController.js"></script>
+<script src="controller/student/downloadController.js"></script>
+
+<script src="controller/student/help/helpRequestController.js"></script>
+<script src="controller/student/examination/assessmentResultController.js"></script>
+<script src="controller/student/examination/finalResultController.js"></script>
+<script src="controller/student/setting/settingController.js"></script>
+
+<script src="controller/alertuser/profileController.js"></script>
+<script src="controller/alertuser/dashboardController.js"></script>
+<script src="controller/alertuser/screenController.js"></script>
+<script src="controller/alertuser/help/helpRequestController.js"></script>
+<script src="controller/alertuser/alert/alertReportController.js"></script>
+<script src="controller/alertuser/setting/settingController.js"></script>
+
+
+
+<script src="controller/teacher/dashboardController.js"></script>
+<script src="controller/teacher/screenController.js"></script>
+<script src="controller/teacher/classCalendarController.js"></script>
+<script src="controller/teacher/alert/alertReportController.js"></script>
+<script src="controller/teacher/alert/sendAppAlertController.js"></script>
+<script src="controller/teacher/markAttendanceController.js"></script>
+<script src="controller/teacher/sendAbsentAlertController.js"></script>
+<script src="controller/teacher/attendance/attendanceAlertReportController.js"></script>
+<script src="controller/teacher/attendance/attendanceInOutReportController.js"></script>
+<script src="controller/teacher/attendance/attendanceInOutDiscrepancyReportController.js"></script>
+<script src="controller/teacher/attendance/studentListController.js"></script>
+<script src="controller/teacher/attendance/studentDetailController.js"></script>
+<script src="controller/teacher/attendance/attendanceReportController.js"></script>
+<script src="controller/teacher/attendance/absentReportController.js"></script>
+<script src="controller/teacher/attendance/attendanceMonthlyReportController.js"></script>
+<script src="controller/teacher/attendance/studentAttendanceMonthlyReportController.js"></script>
+<script src="controller/teacher/attendance/holidayCalendarController.js"></script>
+<script src="controller/teacher/profileController.js"></script>
+<script src="controller/teacher/assignment/viewAssignmentController.js"></script>
+<script src="controller/teacher/assignment/uploadAssignmentController.js"></script>
+<script src="controller/teacher/help/helpRequestController.js"></script>
+<script src="controller/teacher/setting/settingController.js"></script>
+<script src="controller/teacher/notice/sendNoticeController.js"></script>
+<script src="controller/teacher/notice/noticeReportController.js"></script>
+<script src="controller/teacher/assignment/viewAssignmentWorkController.js"></script>
+<script src="controller/teacher/assignment/uploadAssignmentWorkFlowController.js"></script>
+<script src="controller/teacher/smartClassController.js"></script>
+<script src="controller/teacher/scheduleOnlineQuizController.js"></script>
+<script src="controller/teacher/onlineexam/uploadOnlineExamController.js"></script>
+<script src="controller/teacher/onlineexam/viewOnlineExamController.js"></script>
+<script src="controller/teacher/onlineexam/viewOnlineExamWorkController.js"></script>
+<script src="controller/teacher/onlineexam/uploadOnlineExamResultController.js"></script>
+<script src="controller/teacher/onlineexam/viewOnlineExamResultController.js"></script>
+<script src="controller/teacher/onlineexam/viewOnlineExamWorkFlowDocumentController.js"></script>
+<script src="controller/teacher/onlineexam/viewOnlineExamStudentController.js"></script>
+<script src="controller/teacher/elearning/elearningController.js"></script>
+
+
+
+<script src="controller/admin/dashboardController.js"></script>
+<script src="controller/admin/screenController.js"></script>
+<script src="controller/admin/timeTableController.js"></script>
+<script src="controller/admin/alert/alertReportController.js"></script>
+<script src="controller/admin/alert/sendAlertController.js"></script>
+<script src="controller/admin/attendance/studentListController.js"></script>
+<script src="controller/admin/attendance/studentDetailController.js"></script>
+<script src="controller/admin/attendance/employeeListController.js"></script>
+<script src="controller/admin/attendance/employeeDetailController.js"></script>
+<script src="controller/admin/attendance/machineController.js"></script>
+<script src="controller/admin/attendance/machineDetailController.js"></script>
+<script src="controller/admin/markAttendanceController.js"></script>
+<script src="controller/admin/alert/alertReportController.js"></script>
+<script src="controller/admin/help/helpRequestController.js"></script>
+<script src="controller/admin/attendance/attendanceInOutDiscrepancyReportController.js"></script>
+<script src="controller/admin/attendance/attendanceAlertReportController.js"></script>
+<script src="controller/admin/attendance/attendanceInOutReportController.js"></script>
+<script src="controller/admin/attendance/attendanceReportController.js"></script>
+<script src="controller/admin/attendance/absentReportController.js"></script>
+<script src="controller/admin/attendance/attendanceMonthlyReportController.js"></script>
+<script src="controller/admin/attendance/userAttendanceMonthlyReportController.js"></script>
+<script src="controller/admin/attendance/holidayCalendarController.js"></script>
+<script src="controller/admin/notice/sendNoticeController.js"></script>
+<script src="controller/admin/notice/noticeReportController.js"></script>
+<script src="controller/admin/profileController.js"></script>
+<script src="controller/admin/assignment/viewAssignmentController.js"></script>
+<script src="controller/admin/assignment/uploadAssignmentController.js"></script>
+<script src="controller/admin/assignment/viewAssignmentWorkController.js"></script>
+<script src="controller/admin/assignment/viewAssignmentWorkFlowController.js"></script>
+<script src="controller/admin/smartClassController.js"></script>
+<script src="controller/admin/fee/feepaymentSummaryController.js"></script>
+<script src="controller/admin/onlineexam/uploadOnlineExamController.js"></script>
+<script src="controller/admin/elearning/elearningController.js"></script>
+
+<script src="controller/admin/classCalendarController.js"></script>
+<script src="controller/admin/onlineexam/viewOnlineExamStudentController.js"></script>
+<script src="controller/admin/onlineexam/uploadOnlineExamController.js"></script>
+<script src="controller/admin/onlineexam/viewOnlineExamController.js"></script>
+<script src="controller/admin/onlineexam/viewOnlineExamResultController.js"></script>
+<script src="controller/admin/onlineexam/viewOnlineExamWorkFlowDocumentController.js"></script>
+<script src="controller/admin/onlineexam/viewOnlineExamWorkController.js"></script>
+<script src="controller/admin/onlineexam/uploadOnlineExamResultController.js"></script>
+</body>
+</html>
