@@ -1,0 +1,113 @@
+
+<div ng-controller="loginController" ng-cloak style="margin-top: -174px;">
+    <div class="login-cover">
+        <div class="login-cover-image" ng-style="{'background-image':'url({{backgroundImage}})'}" data-id="login-cover-image"></div>
+        <!--<div class="login-cover-image" data-id="login-cover-image"></div>-->
+        <div class="login-cover-bg"></div>
+    </div>
+	<!-- begin login -->
+    <div class="login login-v2" data-pageload-addclass="animated fadeIn">
+        <!-- begin brand -->
+        <div class="login-header">
+           <div class="icon-new">
+                <i class="fa fa-lock"></i>
+            </div>           
+            <div class="brand">
+                <b>{{schoolName}}</b>
+                <hr style="opacity: 0.2;">
+                <small style="color:#ffd900;opacity: 1;">{{city}}</small>
+            </div>           
+        </div>
+        <!-- end brand -->
+        <!-- begin login-content -->
+        <div class="login-content" ng-hide="isHelp">
+            <form method="POST" name="loginForm" class="margin-bottom-0" novalidate>
+                <div class="form-group m-b-20" ng-show="isForgetCredential">
+                    <input type="text" ng-pattern="/^[0-9]{1,10}$/" name="mobileNo" ng-model="mobileNo" class="form-control form-control-lg " placeholder="Mobile No" ng-required="isForgetCredential==true" />
+                    <span class="label label-danger" ng-show="loginForm.mobileNo.$error.required && loginForm.mobileNo.$touched">Mobile No is required.</span>
+                    <span class="label label-danger" ng-show="loginForm.mobileNo.$error.pattern">Invalid phone number.</span>
+                </div>
+                <div class="form-group m-b-20" ng-hide="isForgetCredential">
+                    <input type="text" name="userName" ng-model="userName" class="form-control form-control-lg" placeholder="LoginId" ng-required="isForgetCredential==false" />
+                    <span class="label label-danger" ng-show="loginForm.userName.$error.required && loginForm.userName.$touched">Login Id is required.</span>
+
+                </div>
+                <div class="form-group m-b-20" ng-hide="isForgetCredential">
+                    <input type="password" name="password" ng-model="password" ng-attr-type="{{ showPassword ? 'text':'password'}}"  class="form-control form-control-lg " placeholder="Password" ng-required="isForgetCredential==false" />
+                    <span class="label label-danger" ng-show="loginForm.password.$error.required && loginForm.password.$touched">Password is required.</span>
+
+                </div>
+                <div class="row">
+                <div class="checkbox checkbox-css m-b-20 m-r-10" ng-hide="isForgetCredential">
+                    <input type="checkbox" name="rememberMe" ng-model="rememberMe" id="remember_checkbox" />
+                    <label for="remember_checkbox" class="f-w-400">
+                        Remember Me
+                    </label>
+                </div>
+                <div class="checkbox checkbox-css m-b-20" ng-hide="isForgetCredential">
+                    <input type="checkbox" name="showPassword" ng-model="showPassword" id="show_password" />
+                    <label for="show_password" class="f-w-400">
+                        Show Password
+                    </label>
+                </div>
+                </div>
+                <div class="login-buttons">
+                    <button type="submit" ng-click="loginUser(loginForm)" ng-hide="isForgetCredential" class="btn btn-warning  btn-lg btn-block">Sign me in</button>
+                    <button type="submit" ng-click="resetUser()" ng-hide="isForgetCredential" class="btn btn-danger  btn-lg btn-block">Reset</button>
+                    <button type="submit" ng-click="forgetCredential(loginForm)" ng-show="isForgetCredential" class="btn btn-primary  btn-lg btn-block">Submit</button>
+                </div>
+                <div class="m-t-20 f-13 f-w-400 txt-w" ng-hide="isForgetCredential">
+                    First Time User? Click <a class="text-warning" ng-click="isForgetCredential = !isForgetCredential" href="javascript:;">here</a> to retrieve.
+                </div>
+                
+                <div class="m-t-10 f-13 f-w-400 txt-w" ng-hide="isForgetCredential">
+                    Forgot Credentials? Click <a class="text-warning" ng-click="isForgetCredential = !isForgetCredential" href="javascript:;">here</a> to retrieve.
+                </div>
+                <div class="m-t-10 f-13 f-w-400 txt-w" ng-show="isForgetCredential">
+                    Click <a class="text-warning" ng-click="isForgetCredential = !isForgetCredential" href="javascript:;">here</a> to login.
+                </div>
+                <div class="m-t-10  f-13 f-w-400 txt-w">
+                    Need Help? Click <a class="text-warning" ng-click="isHelp = !isHelp" href="javascript:;">here</a> for help.
+                </div>
+                <div class="m-t-10 f-13 f-w-400 txt-w">
+                   Visit Web ERP? Click <a class="text-warning" href="{{webUrl}}">here</a> for visit.
+                </div>
+                <div class="m-t-10 f-13 f-w-400 txt-w">
+                    App Version: {{version}}
+
+                </div>
+            </form>
+        </div>
+        <div class="login-content" ng-show="isHelp">
+            <form method="POST" name="helpForm" class="margin-bottom-0" novalidate>
+                <div class="form-group m-b-20">
+                    <input type="text" name="name" ng-model="help.name" placeholder='Name' class="form-control form-control-lg " ng-required="true" />
+                    <span class="label label-danger" ng-show="helpForm.name.$error.required && helpForm.name.$touched">Name is required.</span>
+
+                </div>
+                <div class="form-group m-b-20">
+                    <input type="text" phone-input name="mobileNo" ng-model="help.mobileNo" placeholder='Mobile Number' class="form-control form-control-lg " ng-required="true" />
+                    <span class="label label-danger" ng-show="helpForm.mobileNo.$error.required && helpForm.mobileNo.$touched">Mobile Number is required.</span>
+
+                </div>
+                <div class="form-group m-b-20">
+                    <textarea rows="2" name="message" ng-model="help.message" placeholder='Message' class="form-control form-control-lg" ng-required="true"></textarea>
+                    <span class="label label-danger" ng-show="helpForm.message.$error.required && helpForm.message.$touched">Message is required.</span>
+
+                </div>
+               
+                <div class="login-buttons">
+                    <button type="submit" ng-click="createHelp(helpForm)" class="btn btn-primary btn-block btn-lg">Submit</button>
+                </div>
+               
+                <div class="m-t-20 f-13 f-w-400 txt-w">
+                    Click <a class="text-warning" ng-click="isHelp = !isHelp" href="javascript:;">here</a> to login.
+                </div>
+               
+            </form>
+        </div>
+        <!-- end login-content -->
+    </div>
+	<!-- end login -->
+	
+</div>

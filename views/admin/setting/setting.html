@@ -1,0 +1,36 @@
+<div ng-controller="teacherSettingController">
+
+            <div class="panel panel-success">
+                <!-- begin panel-heading -->
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.student.assignment"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+                    </div>
+                    <h4 class="panel-title">Notification Setting</h4>
+                </div>
+                <!-- end panel-heading -->
+                <!-- begin panel-body -->
+                <div class="panel-body">
+                    <div>
+
+                        <div>
+                            <label class="primary">
+                                NOTIFICATION
+                            </label>
+                        </div>
+                        <div class="form-group btn-group btn-group-toggle" data-toggle="buttons">
+                            <label ng-class="setting.isAppNotification==true?'btn btn-outline-primary btn-sm active': 'btn btn-outline-primary btn-sm'" ng-click="setAppNotification(true)">
+                                <input type="radio" name="radioByGroup" > ON
+                            </label>
+                            <label ng-class="setting.isAppNotification==false?'btn btn-outline-primary btn-sm active': 'btn btn-outline-primary btn-sm'"  ng-click="setAppNotification(false)">
+                                <input type="radio" name="radioByGroup" > OFF
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end panel-body -->
+
+</div>

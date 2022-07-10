@@ -1,0 +1,56 @@
+<div ng-controller="branchController" ng-cloak style="margin-top: -110px;">
+    <div class="login-cover">
+        <div class="login-cover-image" ng-style="{'background-image':'url({{backgroundImage}})'}" data-id="login-cover-image"></div>
+        <!--<div class="login-cover-image" data-id="login-cover-image"></div>-->
+        <div class="login-cover-bg"></div>
+    </div>
+    <!-- begin login -->
+    <div class="login login-v2" data-pageload-addclass="animated fadeIn">
+        <!-- begin brand -->
+        <div class="login-header padding-top-130">
+           <div class="icon-new">
+                <i class="fa fa-building"></i>
+            </div>
+            <div class="brand">
+                <b>{{schoolName}}</b>
+            </div>           
+        </div>
+        <!-- end brand -->
+        <!-- begin login-content -->
+        <div class="login-content">
+            <form method="POST" name="branchForm" class="margin-bottom-0" novalidate>
+
+                <div class="row" ng-if="isSchoolCode==false">
+                    <div class="col-sm-12">
+                        <div class="form-group branch-code">
+                            <select name="branch" class="form-control input-lg" ng-required="true" ng-options="x as x.branchName for x in branches" title="Select Your Branch" data-live-search="true"
+                                    ng-model="branch.selectedBranch" selectpickerlarge="" selectpicker-options="branches" >
+                                <option value="" ng-show="false" />
+                            </select>
+                            <span class="label label-danger" ng-show="branchForm.branch.$error.required && branchForm.branch.$touched">Branch is required.</span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group m-b-20" ng-if="isSchoolCode">
+                            <input type="text" name="schoolCode" ng-model="school.schoolCode" class="form-control form-control-lg" placeholder="Enter your School Code" ng-required="true" />
+                            <span class="label label-danger" ng-show="branchForm.schoolCode.$error.required && branchForm.schoolCode.$touched">School Code is required.</span>
+                           
+                        </div>
+
+                            <div class="form-group">
+                                <input  ng-click="submitBranch()" type="button" class="btn btn-warning btn-block btn-lg" value="SUBMIT" />
+
+                            </div>
+
+
+                    </form>
+                
+                </div>
+                    <!-- end panel-body -->
+                </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-10 -->
+    </div>
+    <!-- end row -->
+</div>

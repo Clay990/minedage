@@ -1,0 +1,56 @@
+<div ng-controller="phoneNumberController" ng-cloak style="margin-top: -110px;">
+    <div class="login-cover">
+        <div class="login-cover-image" ng-style="{'background-image':'url({{backgroundImage}})'}" data-id="login-cover-image"></div>
+        <!--<div class="login-cover-image" data-id="login-cover-image"></div>-->
+        <div class="login-cover-bg"></div>
+    </div>
+    <!-- begin login -->
+    <div class="login login-v2" data-pageload-addclass="animated fadeIn">
+        <!-- begin brand -->
+        <div class="login-header padding-top-130">
+           <div class="icon-new">
+                <i class="fas fa-phone-square"></i>
+            </div>
+            <div class="brand">
+                <b>{{schoolName}}</b>
+                <hr style="opacity: 0.2;">
+                <small style="color:#ffd900;opacity: 1;">{{city}}</small>
+            </div>           
+        </div>
+        <!-- end brand -->
+        <!-- begin login-content -->
+        <div class="login-content">
+            <form method="POST" name="phoneNumberForm" class="margin-bottom-0" novalidate>
+
+                        <div class="form-group m-b-50 m-t-20">
+                            <input type="text" ng-disabled="isSendLoginOTP" ng-pattern="/^[0-9]{1,10}$/" name="mobileNo" ng-model="phone.mobileNo" class="form-control form-control-lg" placeholder="Enter your Mobile No" ng-required="true" />
+                            <span class="label label-danger" ng-show="phoneNumberForm.mobileNo.$error.required && phoneNumberForm.mobileNo.$touched">Mobile No is required.</span>
+                            <span class="label label-danger" ng-show="phoneNumberForm.mobileNo.$error.pattern">Invalid phone number.</span>
+                        </div>
+                        <div class="form-group m-b-20" ng-if="isSendLoginOTP">
+                            <input type="text" ng-pattern="/^[0-9]{1,6}$/" name="otp" ng-model="phone.code" class="form-control form-control-lg " placeholder="Enter your OTP" ng-required="true" />
+                            <span class="label label-danger" ng-show="phoneNumberForm.otp.$error.required && phoneNumberForm.otp.$touched">OTP is required.</span>
+                            <span class="label label-danger" ng-show="phoneNumberForm.otp.$error.pattern">Invalid OTP.</span>
+                        </div>
+
+
+                            <div class="form-group">
+                                <input ng-if="!isSendLoginOTP" ng-click="submitPhoneNumber()" type="button" class="btn btn-warning btn-block btn-lg" value="SUBMIT" />
+                                <input ng-if="isSendLoginOTP" ng-click="validateLoginOtp()" type="button" class="btn btn-warning btn-block btn-lg" value="SUBMIT" />
+                                <input ng-if="isPhoneNumber" ng-click="login()" type="button" class="btn btn-primary btn-block btn-lg" value="GO TO LOGIN" />
+                            </div>
+
+                        <div ng-if="isPhoneNumber" class="form-group m-t-20 f-w-400" style="color:#fff;">
+                            If you have LoginId/Password then you can skip this process and go to login.
+                        </div>
+                    </form>
+                
+                </div>
+                    <!-- end panel-body -->
+                </div>
+            <!-- end panel -->
+        </div>
+        <!-- end col-10 -->
+    </div>
+    <!-- end row -->
+</div>
