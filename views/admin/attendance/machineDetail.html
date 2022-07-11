@@ -1,0 +1,104 @@
+<div ng-controller="machineDetailController">
+    <!-- begin profile -->
+    <div class="profile">
+        <div class="profile-header">
+            <!-- BEGIN profile-header-cover -->
+            <div class="profile-header-cover"></div>
+            <!-- END profile-header-cover -->
+            <!-- BEGIN profile-header-content -->
+            <div class="profile-header-content">
+                <!-- BEGIN profile-header-img -->
+                <div class="profile-header-img">
+                    <img ng-src="images/biometric.jpg" alt="">
+                </div>
+                <!-- END profile-header-img -->
+                <!-- BEGIN profile-header-info -->
+                <div class="profile-header-info">
+                    <h4 class="m-t-10 m-b-5">{{machineDetail.machineId}}</h4>
+                    <p class="m-b-10">Machine</p>
+
+                </div>
+                <!-- END profile-header-info -->
+            </div>
+            <!-- END profile-header-content -->
+            <!-- BEGIN profile-header-tab -->
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item"><a href="javascript:;" data-target="#profile-general" class="nav-link active" data-toggle="tab">GENERAL</a></li>
+
+
+
+            </ul>
+            <!-- END profile-header-tab -->
+        </div>
+    </div>
+    <!-- end profile -->
+    <!-- begin profile-content -->
+    <div class="profile-content">
+        <!-- begin tab-content -->
+        <div class="tab-content p-0">
+            <!-- begin #profile-post tab -->
+            <div class="tab-pane fade show active" id="profile-general">
+                <div class="table-responsive">
+                    <table class="table table-profile">
+                        <thead>
+                        <tr>
+
+                            <th colspan="2">
+                                <h4 class="text-white">{{machineDetail.machineId}}
+                                   </h4>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="field text-white">Sim Number</td>
+                            <td class="text-white">{{machineDetail.simNumber}}
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Sim Provider</td>
+                            <td class="text-white">{{machineDetail.simProvider}}
+                        </tr>
+
+                        <tr>
+                            <td class="field text-white">Sim Card Type</td>
+                            <td class="text-white">{{machineDetail.simCardType}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Server Port</td>
+                            <td class="text-white">{{machineDetail.serverPort}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="field text-white">Status</td>
+                            <td class="text-white">{{machineDetail.isActive}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Recharge Date</td>
+                            <td class="text-white">{{machineDetail.rechargeDate  | date:"mediumDate" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Expire Date</td>
+                            <td class="text-white">{{machineDetail.rechargeExpireDate | date:"mediumDate" }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="field text-white">Location</td>
+                            <td class="text-white">{{machineDetail.machineLocation}}</td>
+                        </tr>
+
+                        </tbody>
+
+
+
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end tab-content -->
+    </div>
+    <!-- end profile-content -->
+</div>

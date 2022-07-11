@@ -1,0 +1,71 @@
+<div ng-controller="adminNoticeReportController">
+
+
+            <!-- begin panel -->
+            <div class="panel panel-success">
+                <!-- begin panel-heading -->
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.admin.screen"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+                    </div>
+                    <ng-include src="'views/admin/menu/noticemenu.html'"></ng-include>
+                    <h4 class="panel-title">Notice Report</h4>
+                </div>
+                <!-- end panel-heading -->
+                <!-- begin panel-body -->
+                <div class="panel-body">
+
+                    <div class="tab-content">
+
+                        <div>
+                            <form>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <input type="text" bootstrapdatepicker ng-model="startDate" class="form-control" ng-readonly="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <label>End Date</label>
+                                            <input type="text" bootstrapdatepicker ng-model="endDate" class="form-control" ng-readonly="true" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <div class="form-group">
+                                            <input ng-click="getNoticeReport()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Total Record : {{noticeReport.length}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <table id="data-table-teacher" class="table table-striped table-bordered" datatable="" dt-instance="noticeInstance" dt-options="noticeOptions" dt-columns="noticeColumns"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end panel-body -->
+            </div>
+            <!-- end panel -->
+
+</div>

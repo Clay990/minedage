@@ -1,0 +1,99 @@
+<div ng-controller="feepaymentSummaryController">
+
+
+    <!-- begin panel -->
+    <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.admin.dashboard"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+            </div>
+
+            <h4 class="panel-title">Fee Payment Summary</h4>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <div class="tab-content">
+
+                <div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Start Date</label>
+                                <input type="text" bootstrapdatepicker ng-model="search.startDate" class="form-control" ng-readonly="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>End Date</label>
+                                <input type="text" bootstrapdatepicker ng-model="search.endDate" class="form-control" ng-readonly="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Fee Particular</label>
+                                <select class="form-control" ng-options="x as x.feeParticularName for x in feeParticular" title="Fee Particular" data-live-search="true"
+                                        ng-model="search.feeParticular" selectpicker="" selectpicker-options="feeParticular">
+                                    <option value="" ng-show="false" />
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Payment Mode</label>
+                                <select class="form-control" ng-options="x as x.paymentModeName for x in paymentMode" title="Select Mode" data-live-search="true"
+                                        ng-model="search.paymentMode" selectpicker="" selectpicker-options="paymentMode">
+                                    <option value="" ng-show="false" />
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input ng-click="getFeePaymentSummary()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label> Total Record : {{feePaymentSummary.length}}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="data-table-admin" class="table table-striped table-bordered" datatable="" dt-instance="adminInstance" dt-options="adminOptions" dt-columns="adminColumns">
+                                <tfoot class="t-foot">
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{ totalPaidAmount}}</td>
+                                    <td>{{ totalDueAmount }}</td>
+                                    <td></td>
+                                    <td></td>
+
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+
+</div>

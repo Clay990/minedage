@@ -1,0 +1,119 @@
+<div id="attendanceMonthlyCalendar" ng-controller="adminAttendanceMonthlyReportController">
+   
+
+            <!-- begin panel -->
+            <div class="panel panel-success" data-sortable-id="index-3">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.admin.attendance.attendanceReport"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+                    </div>
+                    <ng-include src="'views/admin/menu/attendancemenu.html'"></ng-include>
+                    <h4 class="panel-title">Attendance Monthly Report</h4>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a href="#default-tab-1" data-toggle="tab" class="nav-link active">
+                            <span class="d-sm-none">My Report</span>
+                            <span class="d-sm-block d-none">Default Tab 1</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#default-tab-2" data-toggle="tab" class="nav-link">
+                            <span class="d-sm-none">Student/Employee Report</span>
+                            <span class="d-sm-block d-none">Default Tab 2</span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+
+                    <div class="tab-pane fade active show" id="default-tab-1">
+                <div id="schedule-calendar" class="bootstrap-calendar"></div>
+                <div class="list-group">
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Present
+                        <span class="badge f-w-500 bg-gradient-teal f-s-10">{{attendanceMonthlyReport.present}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Absent
+                        <span class="badge f-w-500 bg-gradient-red f-s-10">{{attendanceMonthlyReport.absent}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Holiday
+                        <span class="badge f-w-500 bg-gradient-yellow f-s-10">{{attendanceMonthlyReport.holiday}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Not Applicable
+                        <span class="badge f-w-500 bg-gradient-blue f-s-10">{{attendanceMonthlyReport.notApplicable}}</span>
+                    </a>
+                </div>
+                    </div>
+                    <div class="tab-pane fade" id="default-tab-2">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" ng-model="search.userName" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>User Type</label>
+                                    <select class="form-control" ng-options="x as x.roleName for x in roleAttendance" title="User Type" data-live-search="true"
+                                            ng-model="search.role" ng-change="OnRoleChange()" selectpicker="" selectpicker-options="roleAttendance">
+                                        <option value="" ng-show="false" />
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Group</label>
+                                    <select class="form-control" ng-options="x as x.groupName for x in userGroups" title="Select Group" data-live-search="true"
+                                            ng-model="search.group" selectpicker="" selectpicker-options="userGroups">
+                                        <option value="" ng-show="false" />
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Class</label>
+                                    <select class="form-control" ng-options="x as x.groupName for x in userClasses" title="Select Class" data-live-search="true"
+                                            ng-model="search.class" selectpicker="" selectpicker-options="userClasses">
+                                        <option value="" ng-show="false" />
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input ng-click="getUserList()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                Total Record : {{userList.length}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="data-table-admin" class="table table-striped table-bordered" datatable="" dt-instance="orderInstance" dt-options="orderOptions" dt-columns="orderColumns"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end panel -->
+
+</div>

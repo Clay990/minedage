@@ -1,0 +1,145 @@
+<div ng-controller="employeeDetailController">
+    <!-- begin profile -->
+    <div class="profile">
+        <div class="profile-header">
+            <!-- BEGIN profile-header-cover -->
+            <div class="profile-header-cover"></div>
+            <!-- END profile-header-cover -->
+            <!-- BEGIN profile-header-content -->
+            <div class="profile-header-content">
+                <!-- BEGIN profile-header-img -->
+                <div class="profile-header-img">
+                    <img ng-src="{{employeeDetail.photoPath}}" alt="">
+                </div>
+                <!-- END profile-header-img -->
+                <!-- BEGIN profile-header-info -->
+                <div class="profile-header-info">
+                    <h4 class="m-t-10 m-b-5">{{employeeDetail.fullName}}</h4>
+                    <p class="m-b-10">Employee</p>
+                    <a href="#" class="btn btn-xs btn-yellow">Profile</a>
+                </div>
+                <!-- END profile-header-info -->
+            </div>
+            <!-- END profile-header-content -->
+            <!-- BEGIN profile-header-tab -->
+            <ul class="profile-header-tab nav nav-tabs">
+                <li class="nav-item"><a href="javascript:;" data-target="#profile-general" class="nav-link active" data-toggle="tab">GENERAL</a></li>
+                <li class="nav-item"><a href="javascript:;" data-target="#profile-other" class="nav-link" data-toggle="tab">OTHER</a></li>
+
+
+            </ul>
+            <!-- END profile-header-tab -->
+        </div>
+    </div>
+    <!-- end profile -->
+    <!-- begin profile-content -->
+    <div class="profile-content">
+        <!-- begin tab-content -->
+        <div class="tab-content p-0">
+            <!-- begin #profile-post tab -->
+            <div class="tab-pane fade show active" id="profile-general">
+                <div class="table-responsive">
+                    <table class="table table-profile">
+                        <thead>
+                        <tr>
+
+                            <th colspan="2">
+                                <h4 class="text-white">{{employeeDetail.firstName}} {{employeeDetail.middleName}} {{employeeDetail.lastName}}
+                                    <small class="text-white">{{employeeDetail.groupName}}</small></h4>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr class="divider">
+                            <td class="text-white" colspan="2"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="field text-white">Biometric No</td>
+                            <td class="text-white">{{studentDetail.enrollmentNo}}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="field text-white">Aadhar No</td>
+                            <td class="text-white">{{employeeDetail.aadharNo}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Phone Number</td>
+                            <td class="text-white">{{employeeDetail.phoneNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Email Id</td>
+                            <td class="text-white">{{employeeDetail.emailId}}</td>
+                        </tr>
+
+
+
+                        </tbody>
+
+
+
+
+                    </table>
+                </div>
+                <input type="button" ui-sref="app.admin.attendance.employeeList" class="btn btn-success btn-block btn-md" value="BACK" />
+            </div>
+            <!-- end #profile-post tab -->
+            <!-- begin #profile-about tab -->
+            <div class="tab-pane fade in" id="profile-other">
+                <!-- begin table -->
+                <div class="table-responsive">
+                    <table class="table table-profile">
+                        <thead>
+                        <tr>
+
+                            <th colspan="2">
+                                <h4 class="text-white">{{employeeDetail.firstName}} {{employeeDetail.middleName}} {{employeeDetail.lastName}}
+                                    <small class="text-white">{{employeeDetail.groupName}}</small></h4>
+                            </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="field text-white">Adress</td>
+                            <td class="text-white">{{employeeDetail.addressLine1}} </td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">City</td>
+                            <td class="text-white">{{employeeDetail.city}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Pin Code</td>
+                            <td class="text-white">{{employeeDetail.pinCode}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td class="field text-white">Other Phone Number</td>
+                            <td class="text-white">{{employeeDetail.altPhoneNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Blood Group</td>
+                            <td class="text-white">{{employeeDetail.bloodGroupName}}</td>
+                        </tr>
+                        <tr>
+                            <td class="field text-white">Nationality</td>
+                            <td class="text-white">{{employeeDetail.nationalityName}}</td>
+                        </tr>
+
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <input type="button" ui-sref="app.admin.attendance.employeeList" class="btn btn-success btn-block btn-md" value="BACK" />
+                <!-- end table -->
+            </div>
+
+        </div>
+        <!-- end tab-content -->
+    </div>
+    <!-- end profile-content -->
+</div>

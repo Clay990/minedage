@@ -1,0 +1,150 @@
+<div ng-controller="adminUploadAssignmentController">
+
+
+      <!-- begin panel -->
+      <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.admin.screen"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+            </div>
+          <ng-include src="'views/admin/menu/assignmentmenu.html'"></ng-include>
+          <h4 class="panel-title">Upload Assignment</h4>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+          <form method="POST" name="assignmentForm" class="margin-bottom-0" novalidate>
+            <div class="row" ng-if="!school.isSectionApplicable">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Class</label>
+                  <select name="className" class="form-control input-sm" ng-required="true" ng-options="x as x.groupName for x in userGroups" title="Select Class" data-live-search="true"
+                          ng-model="assignment.group" selectpicker="" selectpicker-options="userGroups" ng-change="getSubjects()">
+                    <option value="" ng-show="false" />
+                  </select>
+                  <span class="label label-danger" ng-show="assignmentForm.className.$error.required && assignmentForm.className.$touched">Class is required.</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="row" ng-if="school.isSectionApplicable">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Class</label>
+                  <select name="className" class="form-control input-sm" ng-required="true" ng-options="x as x.groupName for x in userGroups" title="Select Class" data-live-search="true"
+                          ng-model="assignment.group" selectpicker="" selectpicker-options="userGroups" ng-change="getSections()">
+                    <option value="" ng-show="false" />
+                  </select>
+                  <span class="label label-danger" ng-show="assignmentForm.className.$error.required && assignmentForm.className.$touched">Class is required.</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="row" ng-if="school.isSectionApplicable">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Section</label>
+                  <select name="sectionName" class="form-control input-sm" ng-required="true" ng-options="x as x.sectionName for x in userSections" title="Select Section" data-live-search="true"
+                          ng-model="assignment.section" selectpicker="" selectpicker-options="userSections" ng-change="getSubjects()">
+                    <option value="" ng-show="false" />
+                  </select>
+                  <span class="label label-danger" ng-show="assignmentForm.sectionName.$error.required && assignmentForm.sectionName.$touched">Section is required.</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Subject</label>
+                  <select name="subject" class="form-control input-sm" ng-required="true" ng-options="x as x.subjectName for x in subjects" title="Select Subject" data-live-search="true"
+                          ng-model="assignment.subject" selectpicker="" selectpicker-options="subjects" >
+                    <option value="" ng-show="false" />
+                  </select>
+                  <span class="label label-danger" ng-show="assignmentForm.subject.$error.required && assignmentForm.subject.$touched">Subject is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div>
+                    <label>Assignment Date</label>
+                  </div>
+                  <input type="text" bootstrapdatepicker ng-model="assignment.assignmentDate" class="form-control" ng-readonly="true" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div>
+                    <label>Deadline</label>
+                  </div>
+                  <input type="text" bootstrapdatepicker ng-model="assignment.deadline" class="form-control" ng-readonly="true" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea name="description" type="text" ng-model="assignment.description" class="form-control" ng-required="true"
+                  ></textarea>
+
+                  <span class="label label-danger" ng-show="assignmentForm.description.$error.required && assignmentForm.description.$touched">Description is required.</span>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Resource Link</label>
+                  <textarea name="resourceLink" type="text" ng-model="assignment.resourceLink" class="form-control"
+                  ></textarea>
+
+                  <span class="label label-primary" ng-show="assignmentForm.resourceLink.$touched"> Press enter key to put multiple resource link</span>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Student</label>
+                  <select name="class" class="form-control input-sm" ng-options="x as x.fullName for x in students" title="Select Student" data-live-search="true"
+                          ng-model="assignment.student" selectpicker="" selectpicker-options="students">
+                    <option value="" ng-show="false" />
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" capture="camera" ng-dropzone></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <div>
+                    <input  id="btnCamera" ng-click="openCamera()" class="btn btn-primary btn-block btn-md" value="Capture" type="button" />
+                  </div>
+                  <input ng-click="uploadAssignment(assignmentForm)" type="button" class="btn btn-success btn-block btn-md m-t-5" value="Upload" />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- end panel-body -->
+      </div>
+      <!-- end panel -->
+
+</div>

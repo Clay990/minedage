@@ -1,0 +1,46 @@
+<div ng-controller="adminViewAssignmentWorkFlowController">
+
+
+    <!-- begin panel -->
+    <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.admin.assignment.viewAssignment"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+            </div>
+
+            <h4 class="panel-title">Question/Answer</h4>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <form method="POST" name="assignmentForm" class="margin-bottom-0" novalidate>
+
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <b>STUDENT COMMENT</b>
+                    </div>
+                    <div class="col-sm-12">
+
+                        <table id="data-table-responsive" class="table table-striped table-bordered" datatable="" dt-instance="orderInstance" dt-options="orderOptions" dt-columns="orderColumns"></table>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <b>TEACHER COMMENT</b>
+                </div>
+                <div class="col-sm-12">
+
+                    <table id="data-table-teacher" class="table table-striped table-bordered" datatable="" dt-instance="teacherInstance" dt-options="teacherOptions" dt-columns="teacherColumns"></table>
+                </div>
+
+                <input type="button" ui-sref="app.admin.assignment.viewAssignment" class="btn btn-success btn-block btn-md" value="BACK" />
+            </form>
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+
+</div>
