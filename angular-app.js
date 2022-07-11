@@ -80,7 +80,7 @@ colorAdminApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', f
 
     .state('app.student.screen', {
         url: '/screen',
-        templateUrl: 'views/admin/screen.html',
+        templateUrl: 'views/teacher/screen.html',
         data: { pageTitle: 'Screen' }
     })
 
