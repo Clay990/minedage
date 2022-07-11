@@ -1,0 +1,61 @@
+<div ng-controller="studentDashboardController">
+   
+
+		<div class="col">
+			<div class="widget widget-stats bg-red">
+				<div class="stats-icon"><i class="fa fa-desktop"></i></div>
+				<div class="stats-info">
+					<h4>TODAY ALERTS</h4>
+                    <p>{{dashboardReport.alertCount}}</p>	
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;" ui-sref="app.student.alert.alertReport">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col">
+			<div class="widget widget-stats bg-orange">
+				<div class="stats-icon"><i class="fa fa-link"></i></div>
+                <div class="stats-info">
+                    <h4>TODAY NOTICES</h4>
+                    <p>{{dashboardReport.noticeCount}}</p>
+                </div>
+				<div class="stats-link">
+					<a href="javascript:;" ui-sref="app.student.notice">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col" ng-if="isAttendanceModule">
+			<div class="widget widget-stats bg-grey-darker">
+				<div class="stats-icon"><i class="fa fa-users"></i></div>
+                <div class="stats-info">
+                    <h4>TODAY IN TIME</h4>
+                    <p>{{dashboardReport.inTime.replace('/Date(', '').replace(')/', '') | date :"dd MMM, yyyy hh:mm a"}}</p>
+                </div>
+				<div class="stats-link">
+					<a href="javascript:;" ui-sref="app.student.attendance.attendanceReport">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+		<!-- begin col-3 -->
+		<div class="col" ng-if="isAttendanceModule">
+			<div class="widget widget-stats bg-black-lighter">
+				<div class="stats-icon"><i class="fa fa-clock"></i></div>
+                <div class="stats-info">
+                    <h4>TODAY OUT TIME</h4>
+                    <p>{{dashboardReport.outTime.replace('/Date(', '').replace(')/', '') | date :"dd MMM, yyyy hh:mm a"}}</p>
+                </div>
+				<div class="stats-link">
+					<a href="javascript:;" ui-sref="app.student.attendance.attendanceReport">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+		<!-- end col-3 -->
+
+
+</div>
