@@ -1,0 +1,68 @@
+<div ng-controller="teacherUploadOnlineExamResultController">
+
+
+    <!-- begin panel -->
+    <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.teacher.onlineExam.viewOnlineExamStudent({onlineExamId:studentOnlineExam.examId,onlineExamTypeId:studentOnlineExam.examTypeId})"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+            </div>
+
+            <h4 class="panel-title">RESULT : {{onlineExam.studentName}}</h4>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <form method="POST" name="onlineExamForm" class="margin-bottom-0" novalidate>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Remark</label>
+                            <textarea name="description" type="text" ng-model="onlineExam.description" class="form-control" ng-required="true"></textarea>
+
+                            <span class="label label-danger" ng-show="onlineExamForm.description.$error.required && onlineExamForm.description.$touched">Description is required.</span>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Obtained Marks</label>
+                            <input type="number" name="obtainedMarks" ng-model="onlineExam.obtainedMarks" min="0">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" capture="camera" ng-dropzone></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div>
+                                <input id="btnCamera" ng-click="openCamera()" class="btn btn-primary btn-block btn-md" value="Capture Photo" type="button" />
+                            </div>
+
+                            <input ng-click="uploadOnlineExamResult(onlineExamForm)" type="button" class="btn btn-success btn-block btn-md m-t-5" value="Upload" />
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+
+</div>

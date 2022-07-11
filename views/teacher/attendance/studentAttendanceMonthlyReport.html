@@ -1,0 +1,37 @@
+﻿<div id="attendanceMonthlyCalendar" ng-controller="teacherStudentAttendanceMonthlyReportController">
+
+
+            <!-- begin panel -->
+            <div class="panel panel-success" data-sortable-id="index-3">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.teacher.screen"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+                    </div>
+                    <ng-include src="'views/teacher/menu/attendancemenu.html'"></ng-include>
+                    <h4 class="panel-title">{{attendanceMonthlyReport.name}}</h4>
+                </div>
+                <div id="schedule-calendar" class="bootstrap-calendar"></div>
+                <div class="list-group">
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Present
+                        <span class="badge f-w-500 bg-gradient-teal f-s-10">{{attendanceMonthlyReport.present}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Absent
+                        <span class="badge f-w-500 bg-gradient-red f-s-10">{{attendanceMonthlyReport.absent}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Holiday
+                        <span class="badge f-w-500 bg-gradient-yellow f-s-10">{{attendanceMonthlyReport.holiday}}</span>
+                    </a>
+                    <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                        Not Applicable
+                        <span class="badge f-w-500 bg-gradient-blue f-s-10">{{attendanceMonthlyReport.notApplicable}}</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end panel -->
+
+</div>

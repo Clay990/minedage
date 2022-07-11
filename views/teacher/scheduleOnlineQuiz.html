@@ -1,0 +1,66 @@
+<div ng-controller="scheduleOnlineExamController">
+    <!-- begin panel -->
+    <div class="panel panel-success">
+        <!-- begin panel-heading -->
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.student.screen"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+            </div>
+            <h4 class="panel-title">Online Exam</h4>
+        </div>
+        <!-- end panel-heading -->
+        <!-- begin panel-body -->
+        <div class="panel-body">
+            <form></form>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div>
+                            <label>Start Date</label>
+                        </div>
+                        <input type="text" bootstrapdatepicker ng-model="startDate" class="form-control" ng-readonly="true" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div>
+                            <label>End Date</label>
+                        </div>
+                        <input type="text" bootstrapdatepicker ng-model="endDate" class="form-control" ng-readonly="true" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div>
+                            <label>Start Time</label>
+                        </div>
+                        <div class="input-group bootstrap-timepicker timepicker">
+                            <input ng-model="startTime" type="text" class="form-control input-small" bootstraptimepicker>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input ng-click="scheduleOnlineExamCalendar()" type="button" class="btn btn-success btn-block btn-md" value="Submit" />
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- end panel-body -->
+    </div>
+    <!-- end panel -->
+
+</div>

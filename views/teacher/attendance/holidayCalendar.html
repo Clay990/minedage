@@ -1,0 +1,143 @@
+﻿<div ng-controller="teacherHolidayCalendarController">
+   
+
+            <!-- begin panel -->
+            <div class="panel panel-success">
+                <!-- begin panel-heading -->
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.teacher.screen"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    </div>
+                    <ng-include src="'views/teacher/menu/attendancemenu.html'"></ng-include>
+                    <h4 class="panel-title">Holiday Calendar</h4>
+                </div>
+                <!-- end panel-heading -->
+                <!-- begin panel-body -->
+                <div class="panel-body">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a href="#default-tab-1" data-toggle="tab" class="nav-link active">
+                                <span class="d-sm-none">My Calendar</span>
+                                <span class="d-sm-block d-none">Default Tab 1</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#default-tab-2" data-toggle="tab" class="nav-link">
+                                <span class="d-sm-none">Student Calendar</span>
+                                <span class="d-sm-block d-none">Default Tab 2</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade active show" id="default-tab-1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div>
+                                    <label>Start Date</label>
+                                </div>
+                                <input type="text" bootstrapdatepicker ng-model="search.startDate" class="form-control" ng-readonly="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div>
+                                    <label>End Date</label>
+                                </div>
+                                <input type="text" bootstrapdatepicker ng-model="search.endDate" class="form-control" ng-readonly="true" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <input ng-click="getHolidayCalendar()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label>Total Record : {{holidayCalendar.length}}</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="data-table-teacher" class="table table-striped table-bordered" datatable="" dt-instance="teacherInstance" dt-options="teacherOptions" dt-columns="teacherColumns"></table>
+                        </div>
+                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="default-tab-2">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div>
+                                            <label>Start Date</label>
+                                        </div>
+                                        <input type="text" bootstrapdatepicker ng-model="search.startDate" class="form-control" ng-readonly="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div>
+                                            <label>End Date</label>
+                                        </div>
+                                        <input type="text" bootstrapdatepicker ng-model="search.endDate" class="form-control" ng-readonly="true" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Class</label>
+                                        <select name="class" class="form-control input-sm" ng-options="x as x.groupName for x in userGroups" title="Select Class" data-live-search="true"
+                                                ng-model="search.group" selectpicker="" selectpicker-options="userGroups">
+                                            <option value="" ng-show="false" />
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" ng-model="search.studentName" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input ng-click="getStudentHolidayCalendar()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Total Record : {{holidayCalendar.length}}</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="data-table-student" class="table table-striped table-bordered" datatable="" dt-instance="studentInstance" dt-options="studentOptions" dt-columns="studentColumns"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end panel-body -->
+            </div>
+            <!-- end panel -->
+
+</div>
