@@ -1,0 +1,114 @@
+﻿<div ng-controller="alertuserHelpRequestController">
+
+
+            <!-- begin panel -->
+            <div class="panel panel-success">
+                <!-- begin panel-heading -->
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" ui-sref="app.student.assignment"><i class="fa fa-arrow-alt-circle-left"></i></a>
+                        <a href="javascript:;" class="btn btn-sm btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button type="button" ng-click="showSubmitHelp()" class="btn btn-success btn-md">Submit Help</button>
+                    </div>
+                    <h4 class="panel-title">Help Request</h4>
+                </div>
+                <!-- end panel-heading -->
+                <!-- begin panel-body -->
+                <div class="panel-body">
+                    <div ng-show="isSubmitHelp">
+                        <form method="POST" name="helpForm" class="margin-bottom-0" novalidate>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Message</label>
+                                        <textarea type="text" ng-model="help.message" class="form-control" ng-required="true"></textarea>
+                                        <span class="label label-danger" ng-show="helpForm.message.$error.required && helpForm.message.$touched">Description is required.</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <input ng-click="submitHelp(helpForm)" type="button" class="btn btn-success btn-block btn-md" value="Submit" />
+                                        <input ng-click="cancelHelp()" type="button" class="btn btn-warning btn-block btn-md" value="Cancel" />
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                    </div>
+                    <div ng-hide="isSubmitHelp">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="text" bootstrapdatepicker ng-model="startDate" class="form-control" ng-readonly="true" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="text" bootstrapdatepicker ng-model="endDate" class="form-control" ng-readonly="true" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" ng-options="x as x.statusName for x in helpStatus" title="Select Status" data-live-search="true"
+                                            ng-model="statusType.selectedStatus" selectpicker="" selectpicker-options="helpStatus">
+                                        <option value="" ng-show="false" />
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <input ng-click="getHelpRequest()" type="button" class="btn btn-success btn-block btn-md" value="Search" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label>Total Record : {{helps.length}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="accordion" class="card-accordion">
+                                    <div class="card" ng-repeat="h in helps">
+                                        <div class="card-header bg-gradient-lime text-white pointer-cursor collapsed" data-toggle="collapse" data-target="#collapse{{h.helpRequestId}}" ng-click="getHelpDetail(h)">
+                                            {{h.message}}<br /><br />
+                                            <div class="">Submit Date : {{h.createdDate.replace('/Date(', '').replace(')/', '') | date :"dd MMM, yyyy hh:mm a"}}</div>
+                                        </div>
+
+                                        <div id="collapse{{h.helpRequestId}}" class="collapse" data-parent="#accordion">
+                                            <div ng-repeat="d in h.detail">
+                                                {{d.remark}}<br />
+                                                <div><b>Status: </b>{{d.statusName}}    <b>Date: </b>{{d.remarkDate.replace('/Date(', '').replace(')/', '') | date :"dd MMM, yyyy hh:mm a"}}</div>
+                                                <hr />
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end panel-body -->
+            </div>
+            <!-- end panel -->
+
+    <!-- end row -->
+</div>

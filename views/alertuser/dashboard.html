@@ -1,0 +1,24 @@
+<div ng-controller="alertuserDashboardController">
+   
+
+		<!-- begin col-3 -->
+		<div class="col" ng-repeat="x in dashboardReport">
+			<div class="widget widget-stats bg-orange">
+				<div class="stats-icon"><i class="fa fa-desktop"></i></div>
+					<div class="stats-info">
+
+						<p style="font-size:15px;">{{x.alertMessage}}</p>
+					</div>
+			              <br/>
+                   <tr>
+					   <td>Date:{{x.alertDate}}</td>
+					   <td>Time:{{x.alertTime}}</td>
+				   </tr>
+
+			</div>
+
+		</div>
+
+
+
+</div>
